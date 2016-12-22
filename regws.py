@@ -48,14 +48,14 @@ def add_users(contest_id):
 	for row in db.execute('select username, password, teamname,'
 	' hidden from users'):
 		exit_status_1 = subprocess.call([
-			'echo', 'cmsAddUser', 
+			'cmsAddUser', 
 			'-p', row['password'], 
 			row['username'], 
 			row['teamname'], 
 			row['username'],
 		])
 		exit_status_2 = subprocess.call([
-			'echo', 'cmsAddParticipation',
+			'cmsAddParticipation',
 			'-c', str(contest_id),
 			row['username'],
 			'--hidden' if row['hidden'] != 0 else '',
