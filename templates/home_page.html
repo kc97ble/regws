@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+	<h2>Đăng kí</h2>
+	{% if not config.closed %}
+		<form action="{{ url_for('home_page') }}" method=post>
+			<dl>
+				<dt>Tên đăng nhập</dt>
+				<dd><input type=text name=username></dd>
+				<dt>Mật khẩu</dt>
+				<dd><input type=password name=password></dd>
+				<dt>Đội tuyển</dt>
+				<dd>Ví dụ: CTH - Chuyên Tổng Hợp</dd>
+				<dd><input type=text name=teamname></dd>
+				<dt>Hiển thị trên bảng điểm</dt>
+				<dd><input type=radio name=hidden value=0 checked>Hiện</dd>
+				<dd><input type=radio name=hidden value=1>Ẩn</dd>
+				<dt><input class=btn type=submit value="Đăng kí"></dt>
+			</dl>
+		</form>
+	{% else %}
+		<p>Trang đăng kí đã đóng. Liên hệ với BTC tại fb.com/kcxxblx xin đăng kí.</p>
+	{% endif %}
+	<h2>Xem thêm</h2>
+	<ul>
+		<li><a href="{{ config.cwsurl }}">Đăng nhập</a></li>
+		<li><a href="{{ config.rwsurl }}">Bảng điểm</a></li>
+	</ul>
+	<p><i>Lưu ý: Trang đăng nhập và bảng điểm chỉ được bật khi kì thi bắt đầu</i></p>
+{% endblock %}

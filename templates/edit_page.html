@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h2>Chỉnh sửa</h2>
+    <form action="{{ url_for('edit_page') }}" method=post>
+        <dl>
+            <dt>Tên kì thi</dt>
+            <dd><input type=text name=title value="{{ config.title }}"></dd>
+            <dt>Chi tiết kì thi</dt>
+            <dd><textarea name="detail">{{ config.detail }}</textarea></dd>
+            <dt>Đường dẫn đăng nhập</dt>
+            <dd><input type=text name=cwsurl value="{{ config.cwsurl }}"></dd>
+            <dt>Đường dẫn bảng điểm</dt>
+            <dd><input type=text name=rwsurl value="{{ config.rwsurl }}"></dd>
+            <dt>Trạng thái trang đăng kí</dt>
+            <dd><input type=radio name=closed value="0" {{ "" if config.closed else "checked" }}>Mở</dd>
+            <dd><input type=radio name=closed value="1" {{ "checked" if config.closed else "" }}>Đóng</dd>
+        </dl>
+        <input class=btn type=submit value="Lưu">
+    </form>
+{% endblock %}
+
+
+
+
+            

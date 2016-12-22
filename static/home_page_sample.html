@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Free Contest XX</title>
+        <link href="https://fonts.googleapis.com/css?family=Arima+Madurai|David+Libre" rel="stylesheet">
+		<link rel=stylesheet type=text/css href="style.css">        
+	</head>
+	<body>
+		<div class=page>
+			<h1>Free Contest XX</h1>
+			<p>Contest detail</p>
+			<div class=metanav>
+				<div class=flash>Thông báo</div>
+			</div>
+            <h2>Đăng kí</h2>
+            <form action="home_page_sample.html" method=post>
+                <dl>
+                    <dt>Tên đăng nhập</dt>
+                    <dd><input type=text name=username></dd>
+                    <dt>Mật khẩu</dt>
+                    <dd><input type=password name=password></dd>
+                    <dt>Đội tuyển</dt>
+                    <dd>Ví dụ: CTH - Chuyên Tổng Hợp</dd>
+                    <dd><input type=text name=teamname></dd>
+                    <dt>Hiển thị trên bảng điểm</dt>
+                    <dd><input type=radio name=hidden value=0 checked>Hiện</dd>
+                    <dd><input type=radio name=hidden value=1>Ẩn</dd>
+                    <dt><input class=btn type=submit value="Đăng kí"></dt>
+                </dl>
+            </form>
+            <h2>Xem thêm</h2>
+            <ul>
+                <li><a href="{{ config.cwsurl }}">Đăng nhập</a></li>
+                <li><a href="{{ config.rwsurl }}">Bảng điểm</a></li>
+            </ul>
+            <p><i>Lưu ý: Trang đăng nhập và bảng điểm chỉ được bật khi kì thi bắt đầu</i></p>
+		</div>
+	</body>
+</html>
