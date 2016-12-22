@@ -41,8 +41,6 @@ def init_db():
 def add_users(contest_id):
 	"""Add users to CMS"""
 	db = get_db()
-	count_ok = 0
-	count_failed = 0
 	for row in db.execute('select username, password, teamname, hidden from '
 	'users'):
 		cmd1 = ['cmsAddUser', '-p', row['password'], row['username'],
@@ -51,11 +49,8 @@ def add_users(contest_id):
 		if row['hidden'] != 0:
 			cmd2 += '--hidden'
 
-		if subprocess.call(cmd1)==0 and subprocess.call(cmd2)==0:
-			count_ok += 1
-		else:
-			count_failed += 1
-	print("OK %d/%d" % (count_ok, count_ok+count_failed))
+		subprocess.call(cmd1)
+		subprocess.call(cmd2)
 
 import home_page
 import edit_page
