@@ -15,8 +15,7 @@ app.config.update(dict(
 ))
 
 def get_db():
-	"""Open a connection if not existed
-	for the current application context"""
+	"""Open a connection if not existed for the current application context"""
 	if not hasattr(g, 'db'):
 		g.db = sqlite3.connect(app.config['DATABASE'])
 		g.db.row_factory = sqlite3.Row
@@ -24,8 +23,7 @@ def get_db():
 
 @app.teardown_appcontext
 def teardown_db(error):
-	"""Teardown the connection if existed
-	for the current application context"""
+	"""Teardown the connection if existed for the current application context"""
 	if hasattr(g, 'db'):
 		g.db.close()
 
@@ -45,22 +43,15 @@ def add_users(contest_id):
 	db = get_db()
 	count_ok = 0
 	count_failed = 0
-	for row in db.execute('select username, password, teamname,'
-	' hidden from users'):
-		exit_status_1 = subprocess.call([
-			'cmsAddUser', 
-			'-p', row['password'], 
-			row['username'], 
-			row['teamname'], 
-			row['username'],
-		])
-		exit_status_2 = subprocess.call([
-			'cmsAddParticipation',
-			'-c', str(contest_id),
-			row['username'],
-			'--hidden' if row['hidden'] != 0 else '',
-		])
-		if exit_status_1==0 and exit_status_2==0:
+	for row in db.execute('select username, password, teamname, hidden from '
+	'users'):
+		cmd1 = ['cmsAddUser', '-p', row['password'], row['username'],
+			row['teamname'], row['username']]
+		cmd2 = ['cmsAddParticipation', '-c', str(contest_id), row['username']]
+		if row['hidden'] != 0:
+			cmd2 += '--hidden'
+
+		if subprocess.call(cmd1)==0 and subprocess.call(cmd2)==0:
 			count_ok += 1
 		else:
 			count_failed += 1
