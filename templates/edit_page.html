@@ -14,6 +14,9 @@
             <dt>Trạng thái trang đăng kí</dt>
             <dd><input type=radio name=closed value="0" {{ "" if config.closed else "checked" }}>Mở</dd>
             <dd><input type=radio name=closed value="1" {{ "checked" if config.closed else "" }}>Đóng</dd>
+            <dt>Mã kì thi</dt>
+            <dd>Nếu đặt trường này khác 0, các yêu cầu đăng kí của các thí sinh sẽ được xử lý ngay lập tức, tuy nhiên các thí sinh này sẽ bị ẩn khỏi bảng điểm</dd>
+            <dd><input type=number name=contest_id value="{{ config.contest_id }}"></dd>
         </dl>
         <input class=btn type=submit value="Lưu">
     </form>

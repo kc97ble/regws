@@ -28,7 +28,7 @@ def teardown_db(error):
 	if hasattr(g, 'db'):
 		g.db.close()
 
-@app.cli.command('initdb')
+@app.cli.command('init_db')
 def init_db():
 	"""Initialize the database"""
 	print("Initializes the database")
@@ -37,21 +37,18 @@ def init_db():
 		db.cursor().executescript(f.read())
 	db.commit()
 
-@app.cli.command('addusers')
-@click.argument('contest-id', type=int)
-def add_users(contest_id):
-	"""Add users to CMS"""
-	db = get_db()
-	for row in db.execute('select username, password, teamname, hidden from '
-	'users'):
-		cmd1 = ['cmsAddUser', '-p', row['password'], row['username'],
-			row['teamname'], row['username']]
-		cmd2 = ['cmsAddParticipation', '-c', str(contest_id), row['username']]
-		if row['hidden'] != 0:
-			cmd2 += ['--hidden']
+def add_user(contest_id, username, password, teamname, hidden):
+	subprocess.call(['cmsAddUser', '-p', password, username, teamname, username])
+	subprocess.call(['cmsAddParticipation', '-c', str(contest_id), username] + (['--hidden'] if hidden else []))
+	return True
 
-		subprocess.call(cmd1)
-		subprocess.call(cmd2)
+@app.cli.command('add_users')
+@click.argument('contest_id', type=int)
+def add_users(contest_id):
+	"""Add users to a contest"""
+	db = get_db()
+	for row in db.execute('select username, password, teamname, hidden from users'):
+		add_user(contest_id, row[username], row[password], row[teamname], row[hidden])
 
 import home_page
 import edit_page

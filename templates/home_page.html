@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block body %}
 	<h2>Đăng kí</h2>
+	{% if config.contest_id %}
+	<p><i>Yêu cầu của bạn sẽ được xử lý ngay, tuy nhiên bạn sẽ bị ẩn khỏi bảng điểm vì đăng kí muộn</i></p>
+	{% endif %}
 	{% if not config.closed %}
 		<form action="{{ url_for('home_page') }}" method=post>
 			<dl>
@@ -18,7 +21,7 @@
 			</dl>
 		</form>
 	{% else %}
-		<p>Trang đăng kí đã đóng. Liên hệ với BTC tại fb.com/kcxxblx xin đăng kí.</p>
+		<p>Trang đăng kí đã đóng. Liên hệ với BTC tại fb.com/kcxxble xin đăng kí.</p>
 	{% endif %}
 	<h2>Xem thêm</h2>
 	<ul>

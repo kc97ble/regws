@@ -17,8 +17,16 @@ create table config (
 	cwsurl text,
 	rwsurl text,
 	closed boolean,
-	contestid integer
+	contest_id integer
 );
 
-insert into config values (0, 'Free Contest', '(Contest details)', 'http://52.39.24.177/', 'http://52.39.24.177:8890', 0, 0);
+insert into config values (
+	0,
+	'Free Contest',
+	'(Contest details)',
+	'http://52.39.24.177/',
+	'http://52.39.24.177:8890',
+	0,
+	0
+);
 

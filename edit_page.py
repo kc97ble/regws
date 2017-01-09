@@ -9,9 +9,8 @@ from flask import render_template, request, flash
 def edit_page():
 	db = get_db()
 	if request.method=='POST':
-		db.execute('update config set title=?, detail=?, '
-		'cwsurl=?, rwsurl=?, closed=?', [request.form[x] for x 
-		in ['title', 'detail', 'cwsurl', 'rwsurl', 'closed']])
+		fields = ['title', 'detail', 'cwsurl', 'rwsurl', 'closed', 'contest_id']
+		db.execute('update config set {}=?, {}=?, {}=?, {}=?, {}=?, {}=?'.format(*fields), [request.form[x] for x in fields])
 		db.commit()
 		flash(u"Đã lưu")
 	cr = db.execute('select * from config')
