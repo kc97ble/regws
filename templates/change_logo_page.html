@@ -2,7 +2,7 @@
 {% block body %}
 	<h2>Đổi logo</h2>
 	<form method=post enctype=multipart/form-data>
-		<p><img src="/logo?mtime={{ mtime }}"></p>
+		<p><img src="{{ url_for('logo') }}?mtime={{ mtime }}"></p>
 		<p>PNG 200px x 160px</p>
 		<p><input type=file name=file></p>
 		<p><input class=btn type=submit value=Lưu></p>
