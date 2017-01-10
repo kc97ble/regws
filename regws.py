@@ -5,8 +5,10 @@ from __future__ import print_function
 import os, sqlite3, click, subprocess
 from flask import Flask, g, render_template, request, flash,\
 	send_file, abort, redirect
+from ReverseProxied import ReverseProxied
 
 app = Flask(__name__)
+app.wsgi_app = ReverseProxied(app.wsgi_app)
 #app.config.from_object(__name__)
 app.config.update(dict(
 	DATABASE = os.path.join(app.root_path, 'regws.db'),
@@ -69,7 +71,10 @@ def change_logo_page():
 		flash(file.filename)
 		file.save('/var/local/lib/cms/ranking/logo.png')
 		return redirect(request.url)
-	last_modified=os.path.getmtime(filename)
+	if not os.path.isfile(filename):
+		last_modified = None
+	else:
+		last_modified=os.path.getmtime(filename)
 	return render_template('change_logo_page.html',
 		mtime=str(last_modified))
 
