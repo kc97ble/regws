@@ -1,32 +1,33 @@
 {% extends "layout.html" %}
 {% block body %}
-	<h2>Đăng kí</h2>
 	{% if config.contest_id %}
 	<p><i>Yêu cầu của bạn sẽ được xử lý ngay, tuy nhiên bạn sẽ bị ẩn khỏi bảng điểm vì đăng kí muộn</i></p>
 	{% endif %}
 	{% if not config.closed %}
 		<form action="{{ url_for('home_page') }}" method=post>
-			<dl>
-				<dt>Tên đăng nhập</dt>
-				<dd><input type=text name=username></dd>
-				<dt>Mật khẩu</dt>
-				<dd><input type=password name=password></dd>
-				<dt>Đội tuyển</dt>
-				<dd>Ví dụ: CTH - Chuyên Tổng Hợp</dd>
-				<dd><input type=text name=teamname></dd>
-				<dt>Hiển thị trên bảng điểm</dt>
-				<dd><input type=radio name=hidden value=0 checked>Hiện</dd>
-				<dd><input type=radio name=hidden value=1>Ẩn</dd>
-				<dt><input class=btn type=submit value="Đăng kí"></dt>
-			</dl>
+			<label>Tên đăng nhập</label>
+			<input type=text id=username name=username>
+
+			<label>Mật khẩu</label>
+			<input type=password id=password name=password>
+
+			<label>Đội tuyển (ví dụ: CTH - Chuyên Tổng Hợp)</label>
+			<input type=text id=teamname name=teamname>
+
+			<label>Hiển thị tên trên bảng điểm</label>
+			<input type=radio id=hidden_0 value=0 name=hidden checked><label for=hidden_0 class="light">Hiện</label><br>
+			<input type=radio id=hidden_1 value=1 name=hidden><label for=hidden_1 class="light">Ấn</label><br>
+
+			<button type=submit class=button>Đăng ký</button>
 		</form>
 	{% else %}
 		<p>Trang đăng kí đã đóng. Liên hệ với BTC tại fb.com/kcxxble xin đăng kí.</p>
 	{% endif %}
-	<h2>Xem thêm</h2>
+	<!-- <h2>Xem thêm</h2>
 	<ul>
 		<li><a href="{{ config.cwsurl }}">Đăng nhập</a></li>
 		<li><a href="{{ config.rwsurl }}">Bảng điểm</a></li>
 	</ul>
 	<p><i>Lưu ý: Trang đăng nhập và bảng điểm chỉ được bật khi kì thi bắt đầu</i></p>
+	-->
 {% endblock %}
