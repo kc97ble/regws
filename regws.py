@@ -50,7 +50,7 @@ def add_users(contest_id):
 	"""Add users to a contest"""
 	db = get_db()
 	for row in db.execute('select username, password, teamname, hidden from users'):
-		add_user(contest_id, row[username], row[password], row[teamname], row[hidden])
+		add_user(contest_id, row['username'], row['password'], row['teamname'], row['hidden'])
 
 import home_page
 import edit_page
